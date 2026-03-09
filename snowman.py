@@ -46,14 +46,33 @@ def play_game():
     print(f"Secret word selected is: {secret_word}")
 
     mistakes = 0
-    for i in range(len(secret_word)):
+    guessed_letters = []
+    max_mistakes = len(STAGES)-1
+    while(mistakes < max_mistakes):
         guess = input("Guess a letter: ").lower()
         if guess not in secret_word:
             mistakes += 1
-        print(f"You made {mistakes} wrong guess")
-        continue
+            print(f"You made {mistakes} wrong guess")
+            print(STAGES[mistakes])
+            continue
+        guessed_letters.append(guess)
+    return mistakes, secret_word, guessed_letters
 
-    print(f"The secret word is : {secret_word}")
+
+def display_game_state(secret_word, guessed_letters):
+    """Displays the current stage and the secret word
+    with underscores for unguessed letters"""
+
+    display_word = ""
+
+    for letter in secret_word:
+        if letter in guessed_letters:
+            display_word += letter + "_"
+        else:
+            display_word += "_"
+
+        print(f"word: {display_word}")
+        print("\n")
 
 
 
