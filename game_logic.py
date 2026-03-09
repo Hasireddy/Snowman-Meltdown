@@ -1,4 +1,5 @@
 import random
+from ascii_art import STAGES
 
 words = ["python", "git", "github", "snowman", "meltdown"]
 
@@ -11,22 +12,35 @@ def play_game():
     """Guess each letter of the secret word. For every wrong
     guess, the snowman melts"""
 
-    secret_word = get_random_word(words)
+    secret_word = get_random_word(words).strip()
     print("Welcome to the Snowman Meltdown Game!")
     print(f"Secret word selected is: {secret_word}")
 
     mistakes = 0
     guessed_letters = []
     max_mistakes = len(STAGES)-1
+
+    print("Welcome to the Snowman Meltdown Game!")
+
     while(mistakes < max_mistakes):
+        display_game_state(secret_word, guessed_letters)
         guess = input("Guess a letter: ").lower()
+
         if guess not in secret_word:
             mistakes += 1
             print(f"You made {mistakes} wrong guess")
             print(STAGES[mistakes])
-            continue
-        guessed_letters.append(guess)
-    return mistakes, secret_word, guessed_letters
+        else:
+            if guess not in guessed_letters:
+                guessed_letters.append(guess)
+            print("Correct guess!")
+
+        if all(letter in guessed_letters for letter in secret_word):
+            display_game_state(secret_word, guessed_letters)
+            print("Saved the Snowman!")
+            return
+
+    print(f"Snow man melted. The secret word is : {secret_word}")
 
 
 def display_game_state(secret_word, guessed_letters):
@@ -37,9 +51,8 @@ def display_game_state(secret_word, guessed_letters):
 
     for letter in secret_word:
         if letter in guessed_letters:
-            display_word += letter + "_"
+            display_word += letter
         else:
             display_word += "_"
 
-        print(f"word: {display_word}")
-        print("\n")
+    print(f"word: {display_word}")
