@@ -24,7 +24,16 @@ def play_game():
 
     while(mistakes < max_mistakes):
         display_game_state(secret_word, guessed_letters)
+
         guess = input("Guess a letter: ").lower()
+
+        while len(guess) != 1 and not guess.isalpha():
+            print("Please enter a single alphabetical letter.")
+            guess = input("Guess a letter: ").lower()
+
+        if guess in guessed_letters:
+            print("You already guessed this letter!")
+            continue
 
         if guess not in secret_word:
             mistakes += 1
