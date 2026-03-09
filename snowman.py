@@ -7,6 +7,6 @@ if __name__ == "__main__":
         play_game()
         replay = input("\nPlay again? (y/n): ").lower()
 
-        if replay == "y":
-            play_game()
+        if replay != "y":
+            print("Thanks for playing")
             break

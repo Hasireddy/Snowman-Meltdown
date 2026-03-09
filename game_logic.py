@@ -20,14 +20,12 @@ def play_game():
     guessed_letters = []
     max_mistakes = len(STAGES)-1
 
-    print("Welcome to the Snowman Meltdown Game!")
-
     while(mistakes < max_mistakes):
         display_game_state(secret_word, guessed_letters)
 
         guess = input("Guess a letter: ").lower()
 
-        while len(guess) != 1 and not guess.isalpha():
+        while len(guess) != 1 or not guess.isalpha():
             print("Please enter a single alphabetical letter.")
             guess = input("Guess a letter: ").lower()
 
@@ -47,6 +45,7 @@ def play_game():
         if all(letter in guessed_letters for letter in secret_word):
             display_game_state(secret_word, guessed_letters)
             print("Saved the Snowman!")
+            print(f"The secret word is : {secret_word}")
             return
 
     print(f"Snow man melted. The secret word is : {secret_word}")
