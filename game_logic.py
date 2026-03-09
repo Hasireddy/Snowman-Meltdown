@@ -14,6 +14,7 @@ def play_game():
 
     secret_word = get_random_word(words).strip()
     print("Welcome to the Snowman Meltdown Game!")
+    print(STAGES[0])
 
     mistakes = 0
     guessed_letters = []
