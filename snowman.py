@@ -45,15 +45,13 @@ def play_game():
     print("Welcome to the Snowman Meltdown Game!")
     print(f"Secret word selected is: {secret_word}")
 
+    mistakes = 0
     for i in range(len(secret_word)):
-        mistakes = 0
         guess = input("Guess a letter: ").lower()
-        if guess in secret_word:
-            continue
-        else:
+        if guess not in secret_word:
             mistakes += 1
-            print(f"You made wrong guess")
-            continue
+        print(f"You made {mistakes} wrong guess")
+        continue
 
     print(f"The secret word is : {secret_word}")
 
